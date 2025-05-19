@@ -10,12 +10,13 @@
 /// if you have tested on all environments, and it works without it //
 #include <filesystem>
 
-#include "env_fixes.h"                                              //
+#include "env_fixes.h"                                               //
 //////////////////////////////////////////////////////////////////////
-
+#include "game.hpp"
 
 //////////////////////////////////////////////////////////////////////
 /// This class is used to test that the memory leak checks work as expected even when using a GUI
+
 class SomeClass {
 public:
     explicit SomeClass(int) {}
@@ -70,10 +71,6 @@ int main() {
     init_threads();                                                       //
     ////////////////////////////////////////////////////////////////////////
     ///
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
     /////////////////////////////////////////////////////////////////////////
     /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
     /// dați exemple de date de intrare folosind fișierul tastatura.txt
@@ -94,17 +91,6 @@ int main() {
     /// program care merg (și să le evitați pe cele care nu merg).
     ///
     /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
     ///////////////////////////////////////////////////////////////////////////
     /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
     /// alt fișier propriu cu ce alt nume doriți.
@@ -113,68 +99,13 @@ int main() {
     /// for(int i = 0; i < nr2; ++i)
     ///     fis >> v2[i];
     ///
-
+    
     SomeClass *c = getC();
     std::cout << c << "\n";
     delete c;
 
-    sf::RenderWindow window;
-    ///////////////////////////////////////////////////////////////////////////
-    /// NOTE: sync with env variable APP_WINDOW from .github/workflows/cmake.yml:31
-    window.create(sf::VideoMode({800, 700}), "My Window", sf::Style::Default);
-    ///////////////////////////////////////////////////////////////////////////
-    //
-    ///////////////////////////////////////////////////////////////////////////
-    /// NOTE: mandatory use one of vsync or FPS limit (not both)            ///
-    /// This is needed so we do not burn the GPU                            ///
-    window.setVerticalSyncEnabled(true);                                    ///
-    /// window.setFramerateLimit(60);                                       ///
-    ///////////////////////////////////////////////////////////////////////////
-    ///
-    sf::Text text;
-    FontManager::sharedInstance();
-    text.setFont(FontManager::sharedInstance().font());
-    text.setString("Hello World!");
-    text.setCharacterSize(34);
-    text.setFillColor(sf::Color::Red);
-    text.setStyle(sf::Text::Regular);
-    sf::CircleShape circle(100.0f);
-    circle.setFillColor(sf::Color::Red);
-    circle.setPosition(350, 250);
-    text.setPosition(15, 15);
-
-    while(window.isOpen()) {
-        bool shouldExit = false;
-        sf::Event e{};
-        while(window.pollEvent(e)) {
-            switch(e.type) {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            case sf::Event::Resized:
-                std::cout << "New width: " << window.getSize().x << '\n'
-                          << "New height: " << window.getSize().y << '\n';
-                break;
-            case sf::Event::KeyPressed:
-                std::cout << "Received key " << (e.key.code == sf::Keyboard::X ? "X" : "(other)") << "\n";
-                if(e.key.code == sf::Keyboard::Escape)
-                    shouldExit = true;
-                break;
-            default:
-                break;
-            }
-        }
-        if(shouldExit) {
-            window.close();
-            break;
-        }
-        using namespace std::chrono_literals;
-        std::this_thread::sleep_for(300ms);
-
-        window.clear(sf::Color::White);
-        window.draw(text);
-        window.draw(circle);
-        window.display();
-    }
+    Game game;
+    while(game.run());
+    
     return 0;
 }

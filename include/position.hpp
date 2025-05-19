@@ -1,0 +1,40 @@
+#pragma once
+
+class Position {
+private:
+    int row;
+    int col;
+
+public:
+    inline Position(int r = 0, int c = 0) noexcept : row(r), col(c) {}
+    inline Position(const Position& other) noexcept = default;
+
+    inline int getRow() const noexcept { return row; }
+    inline int getCol() const noexcept { return col; }
+
+    inline void setRow(int r) noexcept { row = r; }
+    inline void setCol(int c) noexcept { col = c; }
+
+    inline Position operator+(const Position& other) const noexcept {
+        return Position(row + other.row, col + other.col);
+    }
+    inline Position operator-(const Position& other) const noexcept {
+        return Position(row - other.row, col - other.col);
+    }
+    inline Position& operator+=(const Position& other) noexcept {
+        row += other.row;
+        col += other.col;
+        return *this;
+    }
+    inline Position& operator-=(const Position& other) noexcept {
+        row -= other.row;
+        col -= other.col;
+        return *this;
+    }
+    inline bool operator==(const Position& other) const noexcept {
+        return row == other.row && col == other.col;
+    }
+    inline bool operator!=(const Position& other) const noexcept {
+        return !(*this == other);
+    }
+};
