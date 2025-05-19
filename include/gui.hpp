@@ -27,7 +27,7 @@ namespace GUI{
 
     class TextBox : public Element{
         public:
-        TextBox(std::string, int, int, int, int);
+        TextBox(const std::string&, int, int, int, int);
         ~TextBox() = default;
         TextBox(const TextBox&) = default;
         TextBox& operator=(const TextBox&) = default;
@@ -42,7 +42,7 @@ namespace GUI{
 
     class Button : public TextBox{
         public:
-        Button(std::string distext, int x, int y, int width, int height, std::function<void()> callback) : 
+        Button(const std::string& distext, int x, int y, int width, int height, std::function<void()> callback) : 
             TextBox(distext, x, y, width, height), callback(callback){}
         ~Button() = default;
         Button(const Button&) = default;
@@ -56,7 +56,7 @@ namespace GUI{
 
     class Page{
         public:
-        Page(std::vector<Element*> elements) : elements(elements) {}
+        Page(const std::vector<Element*>& elements) : elements(elements) {}
         Page(const Page&) = default;
         Page& operator=(const Page&) = default;
         ~Page();
