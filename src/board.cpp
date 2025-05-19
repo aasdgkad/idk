@@ -65,10 +65,10 @@ std::unique_ptr<Piece> Board::getRandomPiece() const
 
     case 6:
         return Piece::Factory::createTPiece();
-    }
 
-    throw std::runtime_error("How did you even manage this? rand() % 7 gave you a number that isn't an integer between 0 and 6 inclusive");
-    return nullptr;
+    default:
+    throw std::runtime_error("kys");
+    }
 }
 
 void Board::update()

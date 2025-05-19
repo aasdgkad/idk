@@ -34,8 +34,8 @@ class Game{
         public:
         Menu(std::function<void(Type)> callback);
         ~Menu();
-        Menu(const Menu&) = default;
-        Menu& operator=(const Menu&) = default;
+        Menu(const Menu&) = delete;
+        Menu& operator=(const Menu&) = delete;
 
         bool run() override;
 
@@ -48,8 +48,8 @@ class Game{
         public:
         Tetris(std::function<void(Type)> callback) : State(callback), firstpress(true), board(){}
         ~Tetris() = default;
-        Tetris(const Tetris&) = default;
-        Tetris& operator=(const Tetris&) = default;
+        Tetris(const Tetris&) = delete;
+        Tetris& operator=(const Tetris&) = delete;
 
         bool run() override;
  

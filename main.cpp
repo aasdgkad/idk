@@ -14,56 +14,56 @@
 //////////////////////////////////////////////////////////////////////
 #include "game.hpp"
 
-//////////////////////////////////////////////////////////////////////
-/// This class is used to test that the memory leak checks work as expected even when using a GUI
+// //////////////////////////////////////////////////////////////////////
+// /// This class is used to test that the memory leak checks work as expected even when using a GUI
 
-class SomeClass {
-public:
-    explicit SomeClass(int) {}
-};
+// class SomeClass {
+// public:
+//     explicit SomeClass(int) {}
+// };
 
-SomeClass *getC() {
-    return new SomeClass{2};
-}
-//////////////////////////////////////////////////////////////////////
-class ResourceManager {
-public:
-    enum ResourceType {
-        FONT
-    };
-    static std::string getPathTo(const ResourceType type, const std::string &resource) {
-        // the logic here should be more complicated, when building with CLion the executable is located in a directory
-        // named cmake-build-debug and that's how we get these paths
-        auto path = std::filesystem::current_path().parent_path().append("resources");
-        switch (type) {
-            case FONT:
-                path.append("fonts");
-                break;
-        }
-        return path.append(resource).string();
-    }
-};
+// SomeClass *getC() {
+//     return new SomeClass{2};
+// }
+// //////////////////////////////////////////////////////////////////////
+// class ResourceManager {
+// public:
+//     enum ResourceType {
+//         FONT
+//     };
+//     static std::string getPathTo(const ResourceType type, const std::string &resource) {
+//         // the logic here should be more complicated, when building with CLion the executable is located in a directory
+//         // named cmake-build-debug and that's how we get these paths
+//         auto path = std::filesystem::current_path().parent_path().append("resources");
+//         switch (type) {
+//             case FONT:
+//                 path.append("fonts");
+//                 break;
+//         }
+//         return path.append(resource).string();
+//     }
+// };
 
-class FontManager {
-public:
-    FontManager(const FontManager&) = delete;
-    FontManager& operator=(const FontManager&) = delete;
+// class FontManager {
+// public:
+//     FontManager(const FontManager&) = delete;
+//     FontManager& operator=(const FontManager&) = delete;
 
-    [[nodiscard]] const sf::Font& font() const {
-        return _font;
-    }
+//     [[nodiscard]] const sf::Font& font() const {
+//         return _font;
+//     }
 
-    static FontManager& sharedInstance() {
-        static FontManager instance;
-        return instance;
-    }
+//     static FontManager& sharedInstance() {
+//         static FontManager instance;
+//         return instance;
+//     }
 
-private:
-    sf::Font _font;
-    FontManager() {
-        std::cout<<_font.loadFromFile(ResourceManager::getPathTo(ResourceManager::ResourceType::FONT, "Roboto-Medium.ttf"));
-    }
-};
+// private:
+//     sf::Font _font;
+//     FontManager() {
+//         std::cout<<_font.loadFromFile(ResourceManager::getPathTo(ResourceManager::ResourceType::FONT, "Roboto-Medium.ttf"));
+//     }
+// };
 
 int main() {
     ////////////////////////////////////////////////////////////////////////
@@ -100,9 +100,9 @@ int main() {
     ///     fis >> v2[i];
     ///
     
-    SomeClass *c = getC();
-    std::cout << c << "\n";
-    delete c;
+    // SomeClass *c = getC();
+    // std::cout << c << "\n";
+    // delete c;
 
     Game game;
     while(game.run());
