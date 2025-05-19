@@ -56,7 +56,7 @@ namespace GUI{
 
     class Page{
         public:
-        Page(const std::vector<Element*>& elements) : elements(elements) {}
+        explicit Page(const std::vector<Element*>& elements) : elements(elements) {}
         Page(const Page&) = default;
         Page& operator=(const Page&) = default;
         ~Page();
