@@ -14,8 +14,8 @@ class Board{
     public:
     Board();
     ~Board() = default;
-    Board(const Board &) = delete;
-    Board &operator=(const Board &) = delete;
+    Board(const Board &) = default;
+    Board &operator=(const Board &) = default;
 
     void update();
     void draw() const;

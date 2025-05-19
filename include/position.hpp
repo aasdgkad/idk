@@ -6,8 +6,9 @@ private:
     int col;
 
 public:
-    inline Position(int r = 0, int c = 0) noexcept : row(r), col(c) {}
-    inline Position(const Position& other) noexcept = default;
+    Position(int r = 0, int c = 0) noexcept : row(r), col(c) {}
+    Position(const Position& other) noexcept = default;
+    Position& operator=(const Position& rhs) noexcept = default;
 
     inline int getRow() const noexcept { return row; }
     inline int getCol() const noexcept { return col; }

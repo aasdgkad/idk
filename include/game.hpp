@@ -56,7 +56,6 @@ class Game{
         private:
         bool firstpress;
         Board board;
-        int movedeltatime;
         sf::Clock moveTimer;
     };
 
