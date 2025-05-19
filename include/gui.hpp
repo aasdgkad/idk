@@ -27,7 +27,7 @@ namespace GUI{
 
     class TextBox : public Element{
         public:
-        TextBox(const std::string&, int, int, int, int);
+        TextBox(std::string, int, int, int, int);
         ~TextBox() = default;
         TextBox(const TextBox&) = default;
         TextBox& operator=(const TextBox&) = default;

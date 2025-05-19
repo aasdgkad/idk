@@ -19,7 +19,7 @@ class Piece
 {
 private:
     Piece(std::array<Position, 4> blocks, Block color, bool canRotate) : blocks(blocks), color(color), canRotate(canRotate) {}
-    Piece() : canRotate(false), color(Block::Empty), blocks({}){}
+    Piece() : blocks({}), color(Block::Empty), canRotate(false) {}
     Piece(const Piece &) = default;
     Piece &operator=(const Piece &) = default;
 
