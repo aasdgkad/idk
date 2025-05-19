@@ -28,7 +28,7 @@ namespace GUI{
     class TextBox : public Element{
         public:
         TextBox(std::string, int, int, int, int);
-        ~TextBox() = default;
+        virtual ~TextBox() override  = default;
         TextBox(const TextBox&) = default;
         TextBox& operator=(const TextBox&) = default;
     
@@ -44,7 +44,7 @@ namespace GUI{
         public:
         Button(const std::string& distext, int x, int y, int width, int height, std::function<void()> callback) : 
             TextBox(distext, x, y, width, height), callback(callback){}
-        ~Button() = default;
+        ~Button() override  = default;
         Button(const Button&) = default;
         Button& operator=(const Button&) = default;
 
