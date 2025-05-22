@@ -53,21 +53,26 @@ void GUI::Button::update(){
 
     sf::Vector2i mpos = sf::Mouse::getPosition(window);
     if(this->box.getGlobalBounds().contains(mpos.x, mpos.y)){
+        if(!sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+            firstclick = true;
+        }
         box.setFillColor(sf::Color(50, 50, 50));
         box.setOutlineThickness(2.f);
         box.setOutlineColor(sf::Color(50, 50, 50));
         text.setFillColor(sf::Color(255, 255, 255));
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && firstclick){
             box.setFillColor(sf::Color(20, 20, 20)); 
             box.setOutlineThickness(0.f);
             text.setFillColor(sf::Color(180, 180, 180));
             this->callback();
+            firstclick = false;
         }
     }
     else{
         box.setFillColor(sf::Color(30, 30, 30));
         box.setOutlineThickness(0.f);
         text.setFillColor(sf::Color(240, 240, 240));
+        firstclick = false;
     }
 }
 

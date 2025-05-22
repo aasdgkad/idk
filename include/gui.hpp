@@ -8,7 +8,6 @@
 #include "windowprovider.hpp"
 
 // What you have to do is :
-// Give the Button class a callback function 
 // Make the Menu class create the actual pages through the use of member functions, that will be passed to the buttons as callbacks
 
 namespace GUI{
@@ -43,7 +42,7 @@ namespace GUI{
     class Button : public TextBox{
         public:
         Button(const std::string& distext, int x, int y, int width, int height, std::function<void()> callback) : 
-            TextBox(distext, x, y, width, height), callback(callback){}
+            TextBox(distext, x, y, width, height), callback(callback), firstclick(false){}
         ~Button() override  = default;
         Button(const Button&) = default;
         Button& operator=(const Button&) = default;
@@ -52,6 +51,7 @@ namespace GUI{
 
         private:
         std::function<void()> callback;
+        bool firstclick;
     };
 
     class Page{

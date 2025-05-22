@@ -37,10 +37,13 @@ class Game{
         Menu(const Menu&) = delete;
         Menu& operator=(const Menu&) = delete;
 
+        void addOptionPage();
+
         bool run() override;
 
         private:
         std::stack<GUI::Page*> pages;
+        bool delpage;
     };
 
     
