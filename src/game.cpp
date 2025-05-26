@@ -172,7 +172,8 @@ bool Game::Menu::run(){
     }
 
     window.clear(sf::Color(20, 20, 20));
-    pages.top()->draw();
+    if(!pages.empty())
+        pages.top()->draw();
     window.display();
 
     return window.isOpen();
