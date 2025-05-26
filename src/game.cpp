@@ -162,7 +162,8 @@ bool Game::Menu::run(){
         }
     }
 
-    pages.top()->update();
+    if(!pages.empty())
+        pages.top()->update();
     if(delpage){
         if (!pages.empty()) {
             delete pages.top();
